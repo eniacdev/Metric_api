@@ -10,8 +10,5 @@ Bu proje, backend'in temellerini öğrenmek/kavramak için geliştirilmiştir. E
 - Springboot
 - PostgreSQL
 
-#Proje Mimarisi
-- 
-
 #Lisans
-Apache License 2.0 
+- Apache License 2.0 

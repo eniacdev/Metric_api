@@ -12,10 +12,12 @@ public class MetricsControllerImpl implements IMetricsController{
 	
 	private final IMetricsService metricsService;
 	
+	//constructor injection.
 	public MetricsControllerImpl(IMetricsService metricsService) {
 		this.metricsService = metricsService;
 	}
 
+	//client schedule tetiklenmesini beklemek yerine kendi manuel olarak tetikleyebilir.
 	@Override
 	@GetMapping(path = "/prepare/create/metrics")
 	public SystemLogDto prepareAndCreateMetrics() {

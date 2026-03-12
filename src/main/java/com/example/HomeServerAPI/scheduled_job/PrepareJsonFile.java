@@ -22,13 +22,17 @@ public class PrepareJsonFile {
 		LocalDate date = LocalDate.now();
 		String year = String.valueOf(date.getYear());
 		
+		//güncel tarihi json dosyasının ismi olarak yazılır.
 		String fileName = date.toString() + ".json";
 		
+		//geçerli dosya yolu (path). dosya yolu istenildiği gibi değiştirilebilir, kullanım amacına bağlı.
 		Path directoryPath = Paths.get("/MetricsLog", year);
 		Path filePath = directoryPath.resolve(fileName);
 		
+		//dosya yolunu (path'i) oluşturur.
 		Files.createDirectories(directoryPath);
 		
+		//json dosyanına metrikleri kaydeder.
 		mapper.writerWithDefaultPrettyPrinter().writeValue(filePath.toFile(), metric);	
 		
 		System.out.println("dosya yazma bitti");

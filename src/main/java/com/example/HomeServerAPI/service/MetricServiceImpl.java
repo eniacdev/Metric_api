@@ -22,14 +22,19 @@ public class MetricServiceImpl implements IMetricsService{
 	public SystemLogDto prepareAndCreateMetrics(){
 		
 		try {
-			
+		// schedule tetiklendiğinde servise (buraya) yönlendirir.
+		//ayrıca client'ta manuel tetikleme yapabilir.
+			 
+			//metrikleri toplaması için prepareSystemMetrics'e yönlendirir.
 		SystemLogDto createdMetrics = systemMetrics.preapreSystemMetrics();
 	    SystemLog metrics = new SystemLog();
 	    
 	    BeanUtils.copyProperties(createdMetrics, metrics);
 	    
+	    //gelen metrikleri veritabanına kaydeder.
 	    metricRepository.save(metrics);
 	    
+	    //sonrasında metrikleri json olarak kaydetmesi için writeJsonFile metoduna yönlendirir.
 	    prepareJsonFile.writeJsonFile(createdMetrics);
 	    
 	    return createdMetrics;

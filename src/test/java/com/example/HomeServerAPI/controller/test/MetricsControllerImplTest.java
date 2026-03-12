@@ -30,15 +30,18 @@ public class MetricsControllerImplTest {
 		SystemLogDto metric = new SystemLogDto();
 		OsDto osDto = new OsDto();
 		
+		//given
 		osDto.setOsName("Linux");
 		metric.setOs(osDto);
 		
+		//when
 		when(metricsService.prepareAndCreateMetrics()).thenReturn(metric);
 		
 		mockMvc.perform(get("/homeserver/api/prepare/create/metrics"))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.os.osName").value("Linux"));
 		
+		//then
 		verify(metricsService).prepareAndCreateMetrics();
 		
 	}

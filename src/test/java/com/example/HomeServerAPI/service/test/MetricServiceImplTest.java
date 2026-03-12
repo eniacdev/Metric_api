@@ -37,8 +37,11 @@ public class MetricServiceImplTest {
 	SystemLogDto metric = new SystemLogDto();
 	
 	@BeforeEach
-	public void prepareAndSet(){
+	public void setUp(){
 
+		//test amaçlı metrikler hazırlanır.
+		
+		// given
 		createdMetrics.setLogId(1L);
 		createdMetrics.setTimeStamp(LocalDateTime.now());
 		
@@ -62,13 +65,21 @@ public class MetricServiceImplTest {
 	@Test
 	public void prepareAndCreateMetricsTest() throws Exception{
 		
+		//when
+		
+		//eğer createdMetrics nesnesi repository'e kaydedilebiliyorsa.
 		when(metricRepository.save(any(SystemLog.class))).thenReturn(createdMetrics);
+		//eğer metric nesnesi prepareSytemMetircs'e gönderilip metirkler hazırlanıyorsa.
 		when(prepareSystemMetrics.preapreSystemMetrics()).thenReturn(metric);
 		
 		metricService.prepareAndCreateMetrics();
 		
+		//then
+		
+		//createdMetrics nesnesi null olamaz
 		assertNotNull(createdMetrics);
 		
+		//onayla
 		verify(metricRepository).save(any(SystemLog.class));
 		
 	}

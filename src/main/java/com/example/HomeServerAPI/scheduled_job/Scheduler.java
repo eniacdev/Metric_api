@@ -12,9 +12,15 @@ public class Scheduler {
 	@Autowired
 	private IMetricsService metricsService;
 	
-	@Scheduled(cron = "0 45 10 * * *", zone = "Europe/Istanbul")
+	/* her bir dakikada schedule tetiklenir.
+	 * tetiklendiğinde servisi çağırarak metrikler toplanmaya ve hazırlanmaya başlar.
+	 * en sonunda metrikler hazır olduğunda veritabanına kaydeder ve ek olarak json dosyası oluşturur.
+	 * json dosyanın güncel tarihin ismiyle metrikler kaydedilir.
+	 */
+	@Scheduled(cron = "0 * * * * *")
 	public void doSchedulerJob() {
 		try {
+			//logları okumak ve schedule tetiklendiğinden emin olmak için.
 		System.out.println("schedule çalıştı");
 		metricsService.prepareAndCreateMetrics();
 		}catch (Exception e) {

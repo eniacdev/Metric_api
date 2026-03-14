@@ -1,8 +1,8 @@
-#HomeServerAPI Projesi
+#HomeServerAPI Project
 
-Bu proje, backend'in temellerini öğrenmek/kavramak için geliştirilmiştir. Evimde bulunan sunucum için geliştirdiğim bu servis, günlük istenilen vakite schedule ile tetiklenip sunucunun (yada herhangi bir cihazın) metriklerini toplayıp hem veritabanına kaydeder hemde json formatında bir dosya oluşturarak kaydeder (json formatının okunaklı, basit ve sade bir şekilde olmasına dikkat ettim). Özetle, bu proje bana çok şey katarak backend'te ilerlememde ve gelişmemde yardımcı olmuştur.
+This project was developed to learn/understand the fundamentals of backend development. This service, which I developed for my home server, is triggered daily at specified times using a schedule. It collects metrics from the server (or any device), saves them to a database, and also creates a file in JSON format (I made sure the JSON format was readable, simple, and straightforward). In short, this project has taught me a great deal and helped me progress and improve in backend development.
 
-#Kullanılan Teknolojiler
+#Technology
 
 - Java
 - Maven
@@ -10,5 +10,5 @@ Bu proje, backend'in temellerini öğrenmek/kavramak için geliştirilmiştir. E
 - Springboot
 - PostgreSQL
 
-#Lisans
+#Licence
 - Apache License 2.0 

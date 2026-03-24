@@ -1,4 +1,4 @@
-package com.example.HomeServerAPI.response;
+package com.example.metric_api.response;
 
 import org.springframework.http.HttpStatus;
 

@@ -1,10 +1,11 @@
-package com.example.HomeServerAPI.controller;
+package com.example.metric_api.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.HomeServerAPI.model.SystemLogDto;
-import com.example.HomeServerAPI.service.IMetricsService;
+
+import com.example.metric_api.model.SystemLogDto;
+import com.example.metric_api.service.IMetricsService;
 
 @RestController
 @RequestMapping(path = "/homeserver")

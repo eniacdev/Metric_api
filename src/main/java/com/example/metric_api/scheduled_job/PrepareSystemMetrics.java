@@ -1,4 +1,4 @@
-package com.example.HomeServerAPI.scheduled_job;
+package com.example.metric_api.scheduled_job;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
@@ -7,11 +7,12 @@ import java.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import com.example.HomeServerAPI.model.CpuDto;
-import com.example.HomeServerAPI.model.DiskDto;
-import com.example.HomeServerAPI.model.MemoryDto;
-import com.example.HomeServerAPI.model.OsDto;
-import com.example.HomeServerAPI.model.SystemLogDto;
+
+import com.example.metric_api.model.CpuDto;
+import com.example.metric_api.model.DiskDto;
+import com.example.metric_api.model.MemoryDto;
+import com.example.metric_api.model.OsDto;
+import com.example.metric_api.model.SystemLogDto;
 import com.sun.management.OperatingSystemMXBean;
 
 @Service
@@ -87,6 +88,7 @@ public class PrepareSystemMetrics {
 	public String getHostname() throws Exception{
 		if(InetAddress.getLocalHost().getHostName() != null) {
 			String hostName = InetAddress.getLocalHost().getHostName();
+			return hostName;
 		}
 		return null;
 	}

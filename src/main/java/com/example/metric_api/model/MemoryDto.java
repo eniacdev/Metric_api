@@ -1,4 +1,4 @@
-package com.example.HomeServerAPI.model;
+package com.example.metric_api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

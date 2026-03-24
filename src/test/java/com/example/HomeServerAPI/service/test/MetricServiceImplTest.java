@@ -11,12 +11,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import com.example.HomeServerAPI.model.SystemLog;
-import com.example.HomeServerAPI.model.SystemLogDto;
-import com.example.HomeServerAPI.repository.IMetricRepository;
-import com.example.HomeServerAPI.scheduled_job.PrepareSystemMetrics;
-import com.example.HomeServerAPI.scheduled_job.PrepareJsonFile;
-import com.example.HomeServerAPI.service.MetricServiceImpl;
+
+import com.example.metric_api.model.SystemLog;
+import com.example.metric_api.model.SystemLogDto;
+import com.example.metric_api.repository.IMetricRepository;
+import com.example.metric_api.scheduled_job.PrepareJsonFile;
+import com.example.metric_api.scheduled_job.PrepareSystemMetrics;
+import com.example.metric_api.service.MetricServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 public class MetricServiceImplTest {

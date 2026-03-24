@@ -1,4 +1,4 @@
-package com.example.HomeServerAPI.scheduled_job;
+package com.example.metric_api.scheduled_job;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,7 +7,8 @@ import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import com.example.HomeServerAPI.model.SystemLogDto;
+
+import com.example.metric_api.model.SystemLogDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service

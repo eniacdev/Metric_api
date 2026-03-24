@@ -1,4 +1,4 @@
-package com.example.HomeServerAPI.log;
+package com.example.metric_api.log;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

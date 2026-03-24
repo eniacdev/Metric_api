@@ -1,8 +1,8 @@
-package com.example.HomeServerAPI.repository;
+package com.example.metric_api.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
- 
-import com.example.HomeServerAPI.model.SystemLog;
+
+import com.example.metric_api.model.SystemLog;
 
 public interface IMetricRepository extends JpaRepository<SystemLog, Long>{
 

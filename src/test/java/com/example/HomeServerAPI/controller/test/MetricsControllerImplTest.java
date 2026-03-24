@@ -10,9 +10,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import com.example.HomeServerAPI.model.OsDto;
-import com.example.HomeServerAPI.model.SystemLogDto;
-import com.example.HomeServerAPI.service.IMetricsService;
+
+import com.example.metric_api.model.OsDto;
+import com.example.metric_api.model.SystemLogDto;
+import com.example.metric_api.service.IMetricsService;
 
 
 @SpringBootTest

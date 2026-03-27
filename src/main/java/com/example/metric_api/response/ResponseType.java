@@ -1,24 +1,26 @@
 package com.example.metric_api.response;
 
 import org.springframework.http.HttpStatus;
-
+import com.sun.net.httpserver.Authenticator.Success;
 import com.sun.net.httpserver.HttpsConfigurator;
-
 import lombok.Getter;
 
 @Getter
 public enum ResponseType {
 
+	SUCCESS("SUCCESS","ok",HttpStatus.OK),
 	
 	METRICS_FOUND("METRICS_FOUND", "Metrics is succesfuly found.", HttpStatus.OK),
 	METRICS_COLLECTED("METRICS_COLLECTED", "Metrics is succesfuly collected.", HttpStatus.OK),
 	
-	SCHEDULE_ERROR("SCHEDULE_ERROR","Something went wrong for schedule.", HttpStatus.INTERNAL_SERVER_ERROR),
 	OS_METRICS_NOT_FOUND("OS_METRICS_NOT_FOUND","Os metrics is not found.", HttpStatus.NOT_FOUND),
 	CPU_METRICS_NOT_FOUND("CPU_METRICS_NOT_FOUND","Cpu metrics is not found.", HttpStatus.NOT_FOUND),
 	MEMORY_METRICS_NOT_FOUND("MEMORY_METRICS_NOT_FOUND","Memory metrics is not found.", HttpStatus.NOT_FOUND),
 	DISK_METRICS_NOT_FOUND("DISK_METRICS_NOT_FOUND","Disk metrics is not found.", HttpStatus.NOT_FOUND),
+	HOSTNAME_NOT_FOUND("HOSTNAME_NOT_FOUND", "hostname metric is not found.", HttpStatus.NOT_FOUND),
+	METRICS_NOT_COLLECTED("MERTRICS_NOT_COLLECTED","Something went wrong, metrics not collected.", HttpStatus.NOT_FOUND),
 	METRICS_NOT_FOUND("METRICS_NOT_FOUND", "Metrics is not found", HttpStatus.NOT_FOUND);
+	
 	
 	private String code;
 	private final String message;

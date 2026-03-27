@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MemoryDto {
 	
-	private long memoryUsage;
-	private long freeMemory;
-	private long totalMemory;
+	private Long memoryUsage;
+	private Long freeMemory;
+	private Long totalMemory;
 }

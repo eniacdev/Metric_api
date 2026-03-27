@@ -41,8 +41,8 @@ public class PrepareJsonFile {
 		return true;
 		
 		}catch (Exception e) {
-			e.getMessage();
-			return false;
+			log.error("Json dosyası yazılamadı: {}", e.getMessage());
+		    return false;
 		}
 		
 	}

@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CpuDto {
 	
-	private int cpuCores;
-	private double processCpuLoad;
-	private double systemCpuLoad;
-	private double systemAverageLoad;
+	private Integer cpuCores;
+	private Double processCpuLoad;
+	private Double systemCpuLoad;
+	private Double systemAverageLoad;
 }

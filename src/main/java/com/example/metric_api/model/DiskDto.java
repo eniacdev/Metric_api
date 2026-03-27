@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DiskDto {
 	
-	private long diskUsage;
-	private long freeDisk;
-	private long totalDisk;
+	private Long diskUsage;
+	private Long freeDisk;
+	private Long totalDisk;
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpTimeMetricDto {
+public class UptimeMetricDto {
 
 	private Long serviceUpTime;
 	private Long OsUpTime;

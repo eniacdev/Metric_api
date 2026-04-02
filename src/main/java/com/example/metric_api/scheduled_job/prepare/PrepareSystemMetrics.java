@@ -1,24 +1,11 @@
 package com.example.metric_api.scheduled_job.prepare;
 
-import java.io.File;
 import java.lang.management.ManagementFactory;
-import java.lang.management.RuntimeMXBean;
-import java.net.InetAddress;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import com.example.metric_api.exception_handler.BaseException;
-import com.example.metric_api.model.CpuDto;
-import com.example.metric_api.model.DiskDto;
-import com.example.metric_api.model.MemoryDto;
-import com.example.metric_api.model.OsDto;
 import com.example.metric_api.model.SystemLogDto;
-import com.example.metric_api.model.UpTimeMetricDto;
-import com.example.metric_api.response.ResponseType;
 import com.sun.management.OperatingSystemMXBean;
 
 @Service
@@ -34,115 +21,24 @@ public class PrepareSystemMetrics {
 		
 		SystemLogDto metric = new SystemLogDto();
 		
+		//Preparing Metrics
+		PrepareCpuMetric cpuMetric = new PrepareCpuMetric();
+		PrepareOsMetric osMetric = new PrepareOsMetric();
+		PrepareDiskMetric diskMetric = new PrepareDiskMetric();
+		PrepareMemoryMetric memoryMetric = new PrepareMemoryMetric();
+		PrepareUptimeMetric uptimeMetric = new PrepareUptimeMetric();
+		PrepareHostnameMetric hostnameMetric = new PrepareHostnameMetric();
+		
 		log.warn("the metrics is being preparing");
 		
-		metric.setOs(collectOsMetrics());
-		metric.setCpu(collectCpuMetrics());
-		metric.setMemory(collectMemoryMetrics());
-		metric.setDisk(collectDiskMetrics());
+		metric.setOs(osMetric.collectOsMetrics());
+		metric.setCpu(cpuMetric.collectCpuMetrics());
+		metric.setMemory(memoryMetric.collectMemoryMetrics());
+		metric.setDisk(diskMetric.collectDiskMetrics());
 		metric.setTimeStamp(LocalDateTime.now());
-		metric.setHostName(getHostname());
-		metric.setUpTime(collectUpTimeMetric());
+		metric.setHostName(hostnameMetric.getHostname());
+		metric.setUpTime(uptimeMetric.collectUptimeMetric());
 		
 		return metric;
-	}
-	
-	public UpTimeMetricDto collectUpTimeMetric() throws Exception{
-		
-		RuntimeMXBean rb = ManagementFactory.getRuntimeMXBean();
-		long uptime = rb.getUptime();
-		
-		UpTimeMetricDto upTimeMetricDto = new UpTimeMetricDto();
-		upTimeMetricDto.setOsUpTime(osUptime());
-		upTimeMetricDto.setServiceUpTime(uptime);
-		
-		return upTimeMetricDto;
-	}
-	
-	public Long osUptime() throws Exception{
-		
-		String content = Files.readString(Path.of("/proc/uptime"));
-	    return (long) Double.parseDouble(content.split(" ")[0]);
-		
-	}
-	
-	public Long serviceUpTime() {
-
-		RuntimeMXBean rb = ManagementFactory.getRuntimeMXBean();
-		Long serviceUpTime = rb.getUptime();
-		
-		return serviceUpTime;
-
-	}
-	
-	public OsDto collectOsMetrics() {
-		
-		OsDto osDto = new OsDto();
-		
-		osDto.setOsName(osBean.getName());
-		osDto.setOsVersion(osBean.getVersion());
-		
-		if(osDto.getOsName() == null && osDto.getOsVersion() == null) {
-			throw new BaseException(ResponseType.OS_METRICS_NOT_FOUND);
-		}
-		return osDto;
-	}
-	
-	public CpuDto collectCpuMetrics() {
-		
-		CpuDto cpuDto = new CpuDto();
-		
-		cpuDto.setCpuCores(osBean.getAvailableProcessors());
-		cpuDto.setProcessCpuLoad(osBean.getProcessCpuLoad() * 100);
-		cpuDto.setSystemCpuLoad(osBean.getSystemCpuLoad() * 100);
-		cpuDto.setSystemAverageLoad(osBean.getSystemLoadAverage());
-		
-		if(cpuDto.getCpuCores() == null && cpuDto.getProcessCpuLoad() == null &&
-		   cpuDto.getSystemAverageLoad() == null && cpuDto.getSystemCpuLoad() == null) {
-			throw new BaseException(ResponseType.CPU_METRICS_NOT_FOUND);
-		}
-		return cpuDto;
-	}
-		
-	
-	public MemoryDto collectMemoryMetrics() {
-		
-		MemoryDto memoryDto = new MemoryDto();
-		
-		memoryDto.setFreeMemory(osBean.getFreeMemorySize());
-		memoryDto.setTotalMemory(osBean.getTotalMemorySize());
-		memoryDto.setMemoryUsage(memoryDto.getTotalMemory() - memoryDto.getFreeMemory());
-		
-		if(memoryDto.getFreeMemory() == null && memoryDto.getMemoryUsage() == null &&
-		   memoryDto.getTotalMemory() == null) {
-			throw new BaseException(ResponseType.MEMORY_METRICS_NOT_FOUND);
-		}
-		
-		return memoryDto;
-	}
-	
-	public DiskDto collectDiskMetrics() {
-		
-		DiskDto diskDto = new DiskDto();
-		File root = new File("/");
-		
-		diskDto.setFreeDisk(root.getFreeSpace());
-		diskDto.setTotalDisk(root.getTotalSpace());
-		diskDto.setDiskUsage(diskDto.getTotalDisk() - diskDto.getFreeDisk());
-		
-		if(diskDto.getFreeDisk() == null && diskDto.getTotalDisk() == null &&
-		   diskDto.getDiskUsage() == null) {
-			throw new BaseException(ResponseType.DISK_METRICS_NOT_FOUND);
-		}
-		
-		return diskDto;
-	}
-	
-	public String getHostname() throws Exception{
-		String hostName = InetAddress.getLocalHost().getHostName();
-		if(hostName == null) {
-			throw new BaseException(ResponseType.HOSTNAME_NOT_FOUND);
-		}
-		return hostName;
 	}
 }

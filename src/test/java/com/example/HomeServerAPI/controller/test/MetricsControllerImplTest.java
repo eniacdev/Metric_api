@@ -38,7 +38,7 @@ public class MetricsControllerImplTest {
 		//when
 		when(metricsService.prepareAndCreateMetrics()).thenReturn(metric);
 		
-		mockMvc.perform(get("/homeserver/api/prepare/create/metrics"))
+		mockMvc.perform(get("/homeserver/get/metrics"))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.os.osName").value("Linux"));
 		

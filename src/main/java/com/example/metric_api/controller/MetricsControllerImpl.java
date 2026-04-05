@@ -23,15 +23,6 @@ public class MetricsControllerImpl implements IMetricsController{
 
     private final PrepareJsonFile prepareJsonFile;
 	
-	//get uptime
-	//get os
-	//get cpu
-	//get ram
-	//get disk
-	//delete database
-	//delete by id
-	//find by id
-	
 	private final IMetricsService metricsService;
 	
 	//constructor injection.

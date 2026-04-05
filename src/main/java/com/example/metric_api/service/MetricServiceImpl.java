@@ -10,10 +10,8 @@ import com.example.metric_api.model.CpuDto;
 import com.example.metric_api.model.DiskDto;
 import com.example.metric_api.model.MemoryDto;
 import com.example.metric_api.model.OsDto;
-import com.example.metric_api.model.SystemLog;
 import com.example.metric_api.model.SystemLogDto;
 import com.example.metric_api.model.UptimeMetricDto;
-import com.example.metric_api.repository.IMetricRepository;
 import com.example.metric_api.response.ResponseType;
 import com.example.metric_api.scheduled_job.export.PrepareJsonFile;
 import com.example.metric_api.scheduled_job.prepare.PrepareCpuMetric;
@@ -29,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MetricServiceImpl implements IMetricsService{
 	
-	private final IMetricRepository metricRepository;
 	private final PrepareSystemMetrics systemMetrics;
 	private final PrepareJsonFile prepareJsonFile;
 	
@@ -43,9 +40,6 @@ public class MetricServiceImpl implements IMetricsService{
 		//ayrıca client'ta manuel tetikleme yapabilir.	
 			
 		SystemLogDto createdMetrics = systemMetrics.prepareSystemMetrics();
-	    SystemLog metrics = new SystemLog();
-	    
-	    BeanUtils.copyProperties(createdMetrics, metrics);
 	    
 	    prepareJsonFile.writeJsonFile(createdMetrics);
 	    

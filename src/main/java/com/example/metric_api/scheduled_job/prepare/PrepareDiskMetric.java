@@ -19,7 +19,7 @@ public class PrepareDiskMetric {
 		
 		if(diskDto.getFreeDisk() == null && diskDto.getTotalDisk() == null &&
 		   diskDto.getDiskUsage() == null) {
-			throw new BaseException(ResponseType.DISK_METRICS_NOT_FOUND);
+			throw new BaseException(ResponseType.DISK_METRICS_NOT_COLLECTED);
 		}
 		
 		return diskDto;

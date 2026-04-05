@@ -10,7 +10,7 @@ public class PrepareHostnameMetric {
 	public String getHostname() throws Exception{
 		String hostName = InetAddress.getLocalHost().getHostName();
 		if(hostName == null) {
-			throw new BaseException(ResponseType.HOSTNAME_NOT_FOUND);
+			throw new BaseException(ResponseType.HOSTNAME_NOT_COLLECTED);
 		}
 		return hostName;
 	}

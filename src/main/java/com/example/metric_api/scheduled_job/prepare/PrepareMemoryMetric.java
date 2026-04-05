@@ -19,7 +19,7 @@ public class PrepareMemoryMetric {
 		
 		if(memoryDto.getFreeMemory() == null && memoryDto.getMemoryUsage() == null &&
 		   memoryDto.getTotalMemory() == null) {
-			throw new BaseException(ResponseType.MEMORY_METRICS_NOT_FOUND);
+			throw new BaseException(ResponseType.MEMORY_METRICS_NOT_COLLECTED);
 		}
 		
 		return memoryDto;

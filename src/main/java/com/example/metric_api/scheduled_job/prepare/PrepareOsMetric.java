@@ -2,6 +2,9 @@ package com.example.metric_api.scheduled_job.prepare;
 
 import java.lang.management.ManagementFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.example.metric_api.exception_handler.BaseException;
 import com.example.metric_api.model.OsDto;
 import com.example.metric_api.response.ResponseType;
@@ -13,11 +16,13 @@ public class PrepareOsMetric {
 		OperatingSystemMXBean osBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		OsDto osDto = new OsDto();
 		
+		
+		
 		osDto.setOsName(osBean.getName());
 		osDto.setOsVersion(osBean.getVersion());
 		
 		if(osDto.getOsName() == null && osDto.getOsVersion() == null) {
-			throw new BaseException(ResponseType.OS_METRICS_NOT_FOUND);
+			throw new BaseException(ResponseType.OS_METRICS_NOT_COLLECTED);
 		}
 		return osDto;
 	}

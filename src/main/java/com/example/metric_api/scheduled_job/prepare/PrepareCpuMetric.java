@@ -7,8 +7,13 @@ import com.example.metric_api.model.CpuDto;
 import com.example.metric_api.response.ResponseType;
 import com.sun.management.OperatingSystemMXBean;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
 public class PrepareCpuMetric {
-	
 	public CpuDto collectCpuMetrics() {
 		OperatingSystemMXBean osBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		CpuDto cpuDto = new CpuDto();
@@ -20,9 +25,8 @@ public class PrepareCpuMetric {
 		
 		if(cpuDto.getCpuCores() == null && cpuDto.getProcessCpuLoad() == null &&
 		   cpuDto.getSystemAverageLoad() == null && cpuDto.getSystemCpuLoad() == null) {
-			throw new BaseException(ResponseType.CPU_METRICS_NOT_FOUND);
+			throw new BaseException(ResponseType.CPU_METRICS_NOT_COLLECTED);
 		}
 		return cpuDto;
 	}
-
 }

@@ -26,10 +26,11 @@ public class PrepareJsonFile {
 		
 		LocalDate date = LocalDate.now();
 		String year = String.valueOf(date.getYear());
+		String month = String.format("%02d", date.getMonthValue());
 		
 		String fileName = date.toString() + ".json";
 		
-		Path directoryPath = Paths.get("/MetricsLog", year);
+		Path directoryPath = Paths.get("/MetricsLog", year, month);
 		Path filePath = directoryPath.resolve(fileName);
 		
 		Files.createDirectories(directoryPath);

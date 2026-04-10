@@ -20,15 +20,12 @@ import com.example.metric_api.service.IMetricsService;
 @RestController
 @RequestMapping(path = "/homeserver")
 public class MetricsControllerImpl implements IMetricsController{
-
-    private final PrepareJsonFile prepareJsonFile;
 	
 	private final IMetricsService metricsService;
 	
 	//constructor injection.
-	public MetricsControllerImpl(IMetricsService metricsService, PrepareJsonFile prepareJsonFile) {
+	public MetricsControllerImpl(IMetricsService metricsService) {
 		this.metricsService = metricsService;
-		this.prepareJsonFile = prepareJsonFile;
 	}
 
 	//client schedule tetiklenmesini beklemek yerine kendi manuel olarak tetikleyebilir.

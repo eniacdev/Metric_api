@@ -15,11 +15,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.example.metric_api.controller.MetricsControllerImpl;
 import com.example.metric_api.model.CpuDto;
 import com.example.metric_api.model.DiskDto;
+import com.example.metric_api.model.MemoryDto;
 import com.example.metric_api.model.OsDto;
 import com.example.metric_api.model.SystemLogDto;
 import com.example.metric_api.model.UptimeMetricDto;
 import com.example.metric_api.scheduled_job.export.PrepareJsonFile;
 import com.example.metric_api.service.IMetricsService;
+import com.example.metric_api.service.MetricServiceImpl;
 
 
 
@@ -40,18 +42,31 @@ public class MetricsControllerImplTest {
 	CpuDto cpu = new CpuDto();
 	UptimeMetricDto uptime = new UptimeMetricDto();
 	DiskDto disk = new DiskDto();
+	MemoryDto memory = new MemoryDto();
 	
 	@BeforeEach
 	public void setUp() {
 		
 		os.setOsName("Linux");
-		metric.setOs(os);
+		os.setOsVersion("Linux-version");
 		
-		cpu.setCpuCores(5);
+		cpu.setCpuCores(2);
 		cpu.setProcessCpuLoad(1.5);
 		cpu.setSystemAverageLoad(1.5);
 		cpu.setSystemCpuLoad(1.5);
 		
+		memory.setFreeMemory(10L);
+		memory.setTotalMemory(15L);
+		memory.setMemoryUsage(memory.getTotalMemory() - memory.getFreeMemory());
+		
+		disk.setFreeDisk(10L);
+		disk.setTotalDisk(10L);
+		disk.setDiskUsage(disk.getTotalDisk() - disk.getFreeDisk());
+		
+		metric.setCpu(cpu);
+		metric.setDisk(disk);
+		metric.setMemory(memory);
+		metric.setOs(os);
 	}
 	
 	@Test
@@ -73,15 +88,39 @@ public class MetricsControllerImplTest {
 	@Test
 	public void getCpuMetricTest() throws Exception{
 		
-		
-		
 		when(metricsService.getCpuMetric()).thenReturn(cpu);
 		
 		mockMvc.perform(get("/homeserver/get/cpu"))
 		.andExpect(status().isOk())
-		.andExpect(jsonPath("$.data.cpu.cpuCores").value(5));
+		.andExpect(jsonPath("$.data.cpuCores").value(2))
+		.andDo(print());
 		
 		verify(metricsService).getCpuMetric();
 		
 	}
+	
+	@Test
+	public void getMemoryMetricTest() throws Exception{
+		
+		when(metricsService.getMemoryMetric()).thenReturn(memory);
+		
+		mockMvc.perform(get("/homeserver/get/memory"))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.data.totalMemory").value(15L))
+		.andDo(print());
+		
+		verify(metricsService).getMemoryMetric();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

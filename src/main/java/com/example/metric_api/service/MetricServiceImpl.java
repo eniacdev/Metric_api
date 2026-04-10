@@ -29,9 +29,9 @@ public class MetricServiceImpl implements IMetricsService{
 	
 	private final PrepareSystemMetrics systemMetrics;
 	private final PrepareJsonFile prepareJsonFile;
-	
 	private static final Logger log = LoggerFactory.getLogger(PrepareSystemMetrics.class);
 
+	
 	@Override
 	public SystemLogDto prepareAndCreateMetrics(){
 		

@@ -12,6 +12,9 @@ public enum ResponseType {
 	METRICS_NOT_COLLECTED("MERTRICS_NOT_COLLECTED","Something went wrong, metrics not collected.", HttpStatus.NOT_FOUND),
 	METRICS_NOT_FOUND("METRICS_NOT_FOUND", "Metrics is not found", HttpStatus.NOT_FOUND),
 	
+	SYSTEM_INFO_COLLECTED("SYSTEM_INFO_COLLECTED","System info succesfuly collected.", HttpStatus.OK),
+	SYSTEM_INFO_NOT_COLLECTED("SYSTEM_INFO_COLLECTED","Something went wrong, system info not collected.", HttpStatus.NOT_FOUND),
+	
 	OS_METRICS_NOT_COLLECTED("OS_METRICS_NOT_FOUND","Os metrics is not collected.", HttpStatus.NOT_FOUND),
 	CPU_METRICS_NOT_COLLECTED("CPU_METRICS_NOT_FOUND","Cpu metrics is not collected.", HttpStatus.NOT_FOUND),
 	MEMORY_METRICS_NOT_COLLECTED("MEMORY_METRICS_NOT_FOUND","Memory metrics is not collected.", HttpStatus.NOT_FOUND),

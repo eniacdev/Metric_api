@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.example.metric_api.model.SystemLogDto;
+import com.example.metric_api.model.SystemMetricsDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
@@ -16,7 +16,7 @@ public class PrepareJsonFile {
 	
 	private static final Logger log = LoggerFactory.getLogger(PrepareJsonFile.class);
 	
-	public boolean writeJsonFile(SystemLogDto metric) {
+	public boolean writeJsonFile(SystemMetricsDto metric) {
 		
 		try {
 		

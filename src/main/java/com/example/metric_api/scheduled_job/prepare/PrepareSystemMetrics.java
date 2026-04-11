@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import com.example.metric_api.model.SystemLogDto;
+import com.example.metric_api.model.SystemMetricsDto;
 import com.sun.management.OperatingSystemMXBean;
 
 @Service
@@ -17,26 +17,20 @@ public class PrepareSystemMetrics {
 	OperatingSystemMXBean osBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 	
 	
-	public SystemLogDto prepareSystemMetrics() throws Exception{
+	public SystemMetricsDto prepareSystemMetrics() throws Exception{
 		
-		SystemLogDto metric = new SystemLogDto();
+		SystemMetricsDto metric = new SystemMetricsDto();
 		
 		//Preparing Metrics
 		PrepareCpuMetric cpuMetric = new PrepareCpuMetric();
-		PrepareOsMetric osMetric = new PrepareOsMetric();
 		PrepareDiskMetric diskMetric = new PrepareDiskMetric();
 		PrepareMemoryMetric memoryMetric = new PrepareMemoryMetric();
-		PrepareUptimeMetric uptimeMetric = new PrepareUptimeMetric();
-		PrepareHostnameMetric hostnameMetric = new PrepareHostnameMetric();
 		
 		log.warn("the metrics is being preparing");
 		
-		metric.setOs(osMetric.collectOsMetrics());
 		metric.setCpu(cpuMetric.collectCpuMetrics());
 		metric.setMemory(memoryMetric.collectMemoryMetrics());
 		metric.setDisk(diskMetric.collectDiskMetrics());
-		metric.setHostName(hostnameMetric.getHostname());
-		metric.setUpTime(uptimeMetric.collectUptimeMetric());
 		
 		return metric;
 	}

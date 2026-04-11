@@ -9,7 +9,8 @@ import com.example.metric_api.model.CpuDto;
 import com.example.metric_api.model.DiskDto;
 import com.example.metric_api.model.MemoryDto;
 import com.example.metric_api.model.OsDto;
-import com.example.metric_api.model.SystemLogDto;
+import com.example.metric_api.model.SystemInfo;
+import com.example.metric_api.model.SystemMetricsDto;
 import com.example.metric_api.model.UptimeMetricDto;
 import com.example.metric_api.response.ApiResponse;
 import com.example.metric_api.response.ResponseType;
@@ -31,8 +32,8 @@ public class MetricsControllerImpl implements IMetricsController{
 	//client schedule tetiklenmesini beklemek yerine kendi manuel olarak tetikleyebilir.
 	@Override
 	@GetMapping(path = "/get/metrics")
-	public ResponseEntity<ApiResponse<SystemLogDto>> prepareAndCreateMetrics() {
-		return ApiResponse.ok(ResponseType.METRICS_COLLECTED, metricsService.prepareAndCreateMetrics());
+	public ResponseEntity<ApiResponse<SystemMetricsDto>> prepareAndGetMetrics() {
+		return ApiResponse.ok(ResponseType.METRICS_COLLECTED, metricsService.prepareAndGetMetrics());
 	}
 
 	
@@ -42,13 +43,6 @@ public class MetricsControllerImpl implements IMetricsController{
 		return ApiResponse.ok(ResponseType.METRICS_COLLECTED, metricsService.getCpuMetric());
 	}
 
-	
-
-	@Override
-	@GetMapping(path = "/get/os")
-	public ResponseEntity<ApiResponse<OsDto>> getOsMetric() {
-		return ApiResponse.ok(ResponseType.METRICS_COLLECTED, metricsService.getOsMetric());
-	}
 
 	@Override
 	@GetMapping(path = "/get/memory")
@@ -60,6 +54,12 @@ public class MetricsControllerImpl implements IMetricsController{
 	@GetMapping(path = "/get/disk")
 	public ResponseEntity<ApiResponse<DiskDto>> getDiskMetric() {
 		return ApiResponse.ok(ResponseType.METRICS_COLLECTED, metricsService.getDiskMetric());
+	}
+
+	@Override
+	@GetMapping(path = "/get/system-info")
+	public ResponseEntity<ApiResponse<SystemInfo>> prepareAndGetSystemInfo() throws Exception{
+		return ApiResponse.ok(ResponseType.SYSTEM_INFO_COLLECTED, metricsService.prepareAndGetSystemInfo());
 	}
 
 }

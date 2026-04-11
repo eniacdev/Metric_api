@@ -9,11 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SystemLogDto {
+public class SystemMetricsDto {
 
-	private String hostName;
-	private UptimeMetricDto upTime;
-	private OsDto os;
 	private CpuDto cpu;
 	private MemoryDto memory;
 	private DiskDto disk;

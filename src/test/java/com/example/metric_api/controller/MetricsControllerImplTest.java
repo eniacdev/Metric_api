@@ -17,7 +17,7 @@ import com.example.metric_api.model.CpuDto;
 import com.example.metric_api.model.DiskDto;
 import com.example.metric_api.model.MemoryDto;
 import com.example.metric_api.model.OsDto;
-import com.example.metric_api.model.SystemLogDto;
+import com.example.metric_api.model.SystemMetricsDto;
 import com.example.metric_api.model.UptimeMetricDto;
 import com.example.metric_api.scheduled_job.export.PrepareJsonFile;
 import com.example.metric_api.service.IMetricsService;
@@ -37,7 +37,7 @@ public class MetricsControllerImplTest {
 	@MockBean
 	private PrepareJsonFile prepareJsonFile;
 	
-	SystemLogDto metric = new SystemLogDto();
+	SystemMetricsDto metric = new SystemMetricsDto();
 	OsDto os = new OsDto();
 	CpuDto cpu = new CpuDto();
 	UptimeMetricDto uptime = new UptimeMetricDto();
@@ -66,14 +66,13 @@ public class MetricsControllerImplTest {
 		metric.setCpu(cpu);
 		metric.setDisk(disk);
 		metric.setMemory(memory);
-		metric.setOs(os);
 	}
 	
 	@Test
 	public void prepareAndCreateMetricsTest() throws Exception{
 		
 		//when
-		when(metricsService.prepareAndCreateMetrics()).thenReturn(metric);
+		when(metricsService.prepareAndGetMetrics()).thenReturn(metric);
 		
 		mockMvc.perform(get("/homeserver/get/metrics"))
         .andExpect(status().isOk())
@@ -81,7 +80,7 @@ public class MetricsControllerImplTest {
         .andDo(print());
 		
 		//then
-		verify(metricsService).prepareAndCreateMetrics();
+		verify(metricsService).prepareAndGetMetrics();
 		
 	}
 	
@@ -112,18 +111,7 @@ public class MetricsControllerImplTest {
 		verify(metricsService).getMemoryMetric();
 	}
 	
-	@Test
-	public void getOsMetricTest() throws Exception{
-		when(metricsService.getOsMetric()).thenReturn(os);
-		
-		mockMvc.perform(get("/homeserver/get/os"))
-		.andExpect(status().isOk())
-		.andExpect(jsonPath("$.data.osName").value("Linux"))
-		.andExpect(jsonPath("$.data.osVersion").value("Linux-version"))
-		.andDo(print());
-		
-		verify(metricsService).getOsMetric();
-	}
+	
 	
 	
 	

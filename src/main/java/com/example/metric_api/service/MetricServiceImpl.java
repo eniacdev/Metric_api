@@ -35,7 +35,7 @@ public class MetricServiceImpl implements IMetricsService{
 
 	
 	@Override
-	public SystemMetricsDto prepareAndGetMetrics(){
+	public SystemMetricsDto prepareAndSaveMetrics(){
 		
 		try {
 		// schedule tetiklendiğinde servise (buraya) yönlendirir.
@@ -51,6 +51,12 @@ public class MetricServiceImpl implements IMetricsService{
 			log.error("Metrikler toplanırken bir hata oluştu: {}", e.getMessage());
 	        throw new BaseException(ResponseType.METRICS_NOT_COLLECTED);
 		}
+	}
+
+	@Override
+	public SystemMetricsDto getAllMetrics() throws Exception{
+		SystemMetricsDto collectedMetrics = systemMetrics.prepareSystemMetrics();
+		return collectedMetrics;
 	}
 
 	@Override

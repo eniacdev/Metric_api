@@ -31,12 +31,18 @@ public class MetricsControllerImpl implements IMetricsController{
 
 	//client schedule tetiklenmesini beklemek yerine kendi manuel olarak tetikleyebilir.
 	@Override
-	@GetMapping(path = "/get/metrics")
-	public ResponseEntity<ApiResponse<SystemMetricsDto>> prepareAndGetMetrics() {
-		return ApiResponse.ok(ResponseType.METRICS_COLLECTED, metricsService.prepareAndGetMetrics());
+	@GetMapping(path = "/get/save-metrics")
+	public ResponseEntity<ApiResponse<SystemMetricsDto>> prepareAndSaveMetrics() {
+		return ApiResponse.ok(ResponseType.METRICS_COLLECTED, metricsService.prepareAndSaveMetrics());
 	}
 
-	
+	@Override
+	@GetMapping(path = "/get/all-metrics")
+	public ResponseEntity<ApiResponse<SystemMetricsDto>> getAllMetrics() throws Exception {
+		return ApiResponse.ok(ResponseType.METRICS_COLLECTED, metricsService.getAllMetrics());
+	}
+
+
 	@Override
 	@GetMapping(path = "/get/cpu")
 	public ResponseEntity<ApiResponse<CpuDto>> getCpuMetric() {

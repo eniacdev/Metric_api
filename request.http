@@ -1,0 +1,14 @@
+### cpu metrics
+GET http://localhost:8080/homeserver/get/cpu
+
+### memory metrics
+GET http://localhost:8080/homeserver/get/memory
+
+### disk metrics
+GET http://localhost:8080/homeserver/get/disk
+
+### all metrics
+GET http://localhost:8080/homeserver/get/metrics
+
+### system info
+GET http://localhost:8080/homeserver/get/system-info

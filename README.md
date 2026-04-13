@@ -4,15 +4,7 @@ This project was developed to learn/understand the fundamentals of backend devel
 
 ## Endpoints
 
-Base URl: /homeserver/get
-
-- Endpoint      Method        Description
-
-/metrics	GET	      Returns all system metrics (CPU, RAM, Disk)
-/system-info	GET	      Returns system information (OS, uptime, hostname)	
-/cpu		GET	      Returns CPU metrics only
-/memory		GET	      Returns RAM metrics only
-/disk		GET	      Returns Disk metrics only
+...
 
 ## Technology
 

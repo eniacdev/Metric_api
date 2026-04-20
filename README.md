@@ -4,7 +4,18 @@ This project was developed to learn/understand the fundamentals of backend devel
 
 ## Endpoints
 
-...
+Base path: '/homeserver/metrics'
+
+- `POST /collect`     → collects metrics and saves them as JSON  
+- `GET /`             → returns all metrics  
+- `GET /system`       → returns system info (hostname, OS, uptime)  
+- `GET /cpu`          → returns only CPU metrics  
+- `GET /memory`       → returns only RAM metrics  
+- `GET /disk`         → returns only disk metrics  
+
+## Architecture
+
+![Arcihtecture](./docs/MetricAPIDiagram.drawio.svg)
 
 ## Technology
 

@@ -1,0 +1,22 @@
+{
+  "jsonFile" : {
+    "file" : "MetricsLog/2026/04/2026-04-19.json",
+    "createdAt" : "2026-04-19"
+  },
+  "cpu" : {
+    "cpuCores" : 20,
+    "processCpuLoad" : 0.02307869836141242,
+    "systemCpuLoad" : 6.140350877192982,
+    "systemAverageLoad" : 1.4111328125
+  },
+  "memory" : {
+    "memoryUsage" : 15181340672,
+    "freeMemory" : 1312886784,
+    "totalMemory" : 16494227456
+  },
+  "disk" : {
+    "diskUsage" : 28786139136,
+    "freeDisk" : 125045891072,
+    "totalDisk" : 153832030208
+  }
+}

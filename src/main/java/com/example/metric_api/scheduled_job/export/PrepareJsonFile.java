@@ -4,6 +4,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import com.example.metric_api.model.JsonFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class PrepareJsonFile {
 	
 	private static final Logger log = LoggerFactory.getLogger(PrepareJsonFile.class);
+	private final ObjectMapper objectMapper;
+
+	public PrepareJsonFile(ObjectMapper objectMapper){
+		this.objectMapper = objectMapper;
+	}
 	
 	public boolean writeJsonFile(SystemMetricsDto metric) {
 		
@@ -22,7 +30,8 @@ public class PrepareJsonFile {
 		
 		log.warn("The json file is being preparing.");
 			
-		ObjectMapper mapper = new ObjectMapper();
+
+		JsonFile jsonFile = new JsonFile();
 		
 		LocalDate date = LocalDate.now();
 		String year = String.valueOf(date.getYear());
@@ -30,13 +39,18 @@ public class PrepareJsonFile {
 		
 		String fileName = date.toString() + ".json";
 		
-		Path directoryPath = Paths.get("/MetricsLog", year, month);
+		Path directoryPath = Paths.get("MetricsLog", year, month);
 		Path filePath = directoryPath.resolve(fileName);
-		
+
+		/*jsonFile.setFile(filePath.toString());
+		jsonFile.setCreatedAt(date);
+
+		metric.setJsonFile(jsonFile);*/
+
 		Files.createDirectories(directoryPath);
 		
-		mapper.writerWithDefaultPrettyPrinter().writeValue(filePath.toFile(), metric);	
-		
+		objectMapper.writerWithDefaultPrettyPrinter().writeValue(filePath.toFile(), metric);
+
 		log.info("file is ready.");
 		
 		return true;

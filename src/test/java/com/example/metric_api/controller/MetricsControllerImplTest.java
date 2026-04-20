@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import com.example.metric_api.controller.MetricsControllerImpl;
 import com.example.metric_api.model.CpuDto;
@@ -31,10 +32,10 @@ public class MetricsControllerImplTest {
 	@Autowired
 	private MockMvc mockMvc;
 	
-	@MockBean
+	@MockitoBean
 	private IMetricsService metricsService;
 	
-	@MockBean
+	@MockitoBean
 	private PrepareJsonFile prepareJsonFile;
 	
 	SystemMetricsDto metric = new SystemMetricsDto();
@@ -74,9 +75,9 @@ public class MetricsControllerImplTest {
 		//when
 		when(metricsService.prepareAndSaveMetrics()).thenReturn(metric);
 		
-		mockMvc.perform(get("/homeserver/get/metrics"))
+		mockMvc.perform(post("/homeserver/metrics/collect"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.data.os.osName").value("Linux"))
+        .andExpect(jsonPath("$.data.cpu.cpuCores").value(2))
         .andDo(print());
 		
 		//then
@@ -89,7 +90,7 @@ public class MetricsControllerImplTest {
 		
 		when(metricsService.getCpuMetric()).thenReturn(cpu);
 		
-		mockMvc.perform(get("/homeserver/get/cpu"))
+		mockMvc.perform(get("/homeserver/metrics/cpu"))
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$.data.cpuCores").value(2))
 		.andDo(print());
@@ -103,7 +104,7 @@ public class MetricsControllerImplTest {
 		
 		when(metricsService.getMemoryMetric()).thenReturn(memory);
 		
-		mockMvc.perform(get("/homeserver/get/memory"))
+		mockMvc.perform(get("/homeserver/metrics/memory"))
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$.data.totalMemory").value(15L))
 		.andDo(print());

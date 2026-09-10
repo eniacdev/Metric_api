@@ -2,7 +2,6 @@ package com.example.metric_api.scheduled_job.schedule;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import com.example.metric_api.service.IMetricsService;
@@ -17,19 +16,14 @@ public class Scheduler {
 		this.metricsService = metricsService;
 	}
 
-	/* istenilen zamanda tetiklenir
-	 * tetiklendiğinde servisi çağırarak metrikler toplanmaya ve hazırlanmaya başlar.
-	 * en sonunda metrikler hazır olduğunda veritabanına (veritabanı kaldırıldı ancak ileride gerekebilir) kaydeder ve ek olarak json dosyası oluşturur.
-	 * json dosyanın güncel tarihin ismiyle metrikler kaydedilir.
-	 */
-	
-	@Scheduled(fixedRate = 5000, initialDelay = 10000, zone = "Europe/Istanbul")
+	// cron ve zone application.properties dosyasında değişirilebilir.
+	@Scheduled(cron = "${scheduler.cron.expression}", zone = "${scheduler.cron.zone}")
 	public void doSchedulerJob() {
 		try {
 		log.info("Schedule started.");
 		metricsService.saveMetrics();
 		}catch (Exception e) {
-			e.getMessage();
+			log.error("Something went wrong at Scheduler, schedule job failed: " + e.getMessage());
 		}
 	}
 }

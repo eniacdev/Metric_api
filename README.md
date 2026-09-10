@@ -22,6 +22,14 @@ spring.datasource.username=your_username
 spring.datasource.password=your_password
 ```
 
+## Scheduler Configuration
+Metric collection runs on a schedule (`@Scheduled`), configured via a cron expression in `application.properties`:
+```properties
+scheduler.cron.expression=0 * * * * *
+scheduler.cron.zone=UTC
+```
+Spring's cron format has **6 fields**: `second minute hour day-of-month month day-of-week`. The example above (`0 * * * * *`) runs once every minute.
+
 **3. Run the appplication**
 ```bash
 ./mvnw spring-boot:run
@@ -55,7 +63,7 @@ Base path: `/api/v1/metrics`
 | Param        | Type   | Description                                 |
 |--------------|--------|---------------------------------------------|
 | `startDate`  | date   | Filter results from this date (optional)    |
-| `endDate`    | date   | Filter results from this daye (optional)    |
+| `endDate`    | date   | Filter results from this date (optional)    |
 | `pageNumber` | int    | Page number (default: 0)                    |
 | `pageSize`   | int    | Page size (default: 12)                     |
 | `sortedBy`   | string | Sort direction: ASC or DESC (default: DESC) |

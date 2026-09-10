@@ -22,14 +22,6 @@ spring.datasource.username=your_username
 spring.datasource.password=your_password
 ```
 
-## Scheduler Configuration
-Metric collection runs on a schedule (`@Scheduled`), configured via a cron expression in `application.properties`:
-```properties
-scheduler.cron.expression=0 * * * * *
-scheduler.cron.zone=UTC
-```
-Spring's cron format has **6 fields**: `second minute hour day-of-month month day-of-week`. The example above (`0 * * * * *`) runs once every minute.
-
 **3. Run the appplication**
 ```bash
 ./mvnw spring-boot:run
@@ -38,6 +30,14 @@ Spring's cron format has **6 fields**: `second minute hour day-of-month month da
 The API will be available at `http://localhost:8080`.
 
 > A separate Docker-Based setup is planned; this project currently runs via Maven only.
+
+## Scheduler Configuration
+Metric collection runs on a schedule (`@Scheduled`), configured via a cron expression in `application.properties`:
+```properties
+scheduler.cron.expression=0 * * * * *
+scheduler.cron.zone=UTC
+```
+Spring's cron format has **6 fields**: `second minute hour day-of-month month day-of-week`. The example above (`0 * * * * *`) runs once every minute.
 
 ## Endpoints
 

@@ -2,6 +2,12 @@
 
 This project was developed to learn/understand the fundamentals of backend development. This service, which I developed for my home server, is triggered daily at specified times using a schedule. It collects metrics from the server (or any device), saves them to a database, and also creates a file in JSON format (I made sure the JSON format was readable, simple, and straightforward). In short, this project has taught me a great deal and helped me progress and improve in backend development.
 
+## Security Note
+
+This project is designed for **localhost-only** use and assumes it will not be exposed to external networks. No authentication/authorization layer (e.g. Spring Security) is included, since the target environment is a single, non-public server.
+
+If you plan to expose this application beyond localhost, you are responsible for adding an appropriate security layer (authentication, HTTPS, network restrictions, etc.) before doing so.
+
 ## Setup & Running
 
 **Prerequisites:**

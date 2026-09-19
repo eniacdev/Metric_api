@@ -1,10 +1,20 @@
 spring.application.name=metric_api
-server.port=${SERVER_PORT}
-spring.datasource.url=${DB_URL}
-spring.datasource.username=${DB_USERNAME}
-spring.datasource.password=${DB_PASSWORD}
-spring.datasource.driver-class-name=org.postgresql.Driver
+
+server.port=
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+# warn: use the 'update' value after running the project.
 spring.jpa.hibernate.ddl-auto=create
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-scheduler.cron.expression={CRON}
-scheduler.cron.zone={ZONE}
+
+# cron example: 30 * * * * *
+scheduler.cron.expression=
+
+# zone example: Europe/Bavaria
+scheduler.cron.zone=
+
+# cron example: 0 0 4 * * *
+metrics.retention.cron=
+
+# retention day example: 15
+metrics.retention.day=

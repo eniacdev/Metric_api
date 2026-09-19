@@ -18,6 +18,7 @@ public enum ResponseType {
 	LOG_FOUND("LOG_FOUND", "Log is successfully found in database.", HttpStatus.FOUND),
 	LOG_NOT_FOUND("LOG_NOT_FOUND", "Log is not found in database.", HttpStatus.NOT_FOUND),
 	LOG_DELETED("LOG_DELETED", "Log is successfully deleted in database", HttpStatus.OK),
+	LOGS_CLEANED("LOGS_CLEANED", "Logs succesfully cleaned in database.", HttpStatus.OK),
 
 	BUILD_SNAPSHOT_SUCCESSFULLY("BUILD_SNAPSHOT_SUCCESFULLY", "Snapshot successfully written to json file.", HttpStatus.OK),
 

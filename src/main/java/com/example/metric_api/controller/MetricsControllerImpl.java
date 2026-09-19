@@ -2,6 +2,8 @@ package com.example.metric_api.controller;
 
 import com.example.metric_api.dto.*;
 import com.example.metric_api.model.*;
+import com.example.metric_api.repository.IMetricsRepository;
+import com.example.metric_api.scheduled_job.cleaner.MetricsCleaner;
 import com.example.metric_api.validator.MetricsValidator;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,11 +19,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/metrics")
 public class MetricsControllerImpl implements IMetricsController{
-	
-	private final IMetricsService metricsService;
 
-	public MetricsControllerImpl(IMetricsService metricsService) {
+	private final IMetricsService metricsService;
+	private final IMetricsRepository metricsRepository;
+	private final MetricsCleaner metricsCleaner;
+
+	public MetricsControllerImpl(IMetricsService metricsService, IMetricsRepository metricsRepository, MetricsCleaner metricsCleaner) {
 		this.metricsService = metricsService;
+		this.metricsRepository = metricsRepository;
+		this.metricsCleaner = metricsCleaner;
 	}
 
 	// client schedule tetiklenmesini beklemek yerine kendi manuel olarak tetikleyebilir.
@@ -68,6 +74,12 @@ public class MetricsControllerImpl implements IMetricsController{
 	@DeleteMapping("/log/{id}")
 	public ResponseEntity<ApiResponse<Boolean>> deleteLogById(@PathVariable(name = "id") long id) {
 		return ApiResponse.ok(ResponseType.METRICS_DELETED, metricsService.deleteLogById(id));
+	}
+
+	@Override
+	@DeleteMapping("/clean")
+	public ResponseEntity<ApiResponse<Integer>> cleanOldMetrics() {
+		return ApiResponse.ok(ResponseType.LOGS_CLEANED, metricsCleaner.cleanOldMetrics());
 	}
 
 	@Override

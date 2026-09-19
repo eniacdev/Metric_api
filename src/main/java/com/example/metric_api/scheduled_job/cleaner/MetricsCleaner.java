@@ -27,9 +27,13 @@ public class MetricsCleaner {
     // cleanOldMetrics()
     //@ConfigurationProperties(prefix = "shceduler.cron.clear")
     @Scheduled(cron = "${metrics.retention.cron}")
-    public void cleanOldMetrics() {
+    public int cleanOldMetrics() {
         LocalDateTime thershold = LocalDateTime.now().minusDays(retentionDays);
         int deleted = metricsRepository.deleteOlderThan(thershold);
-        log.info("{} kayıt silindi", deleted);
+        if(deleted == 0) {
+            log.info("No log were deleted. Check whether they had been deleted or the operation repeated previously.");
+        }
+        log.info("{} log deleted.", deleted);
+        return deleted;
     }
 }
